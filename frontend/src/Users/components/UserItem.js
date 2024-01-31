@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const UserItem = (props) => {
     return (
         <li
-            className="bg-teal-600 w-60 justify-center flex font-semibold p-2 rounded-lg mt-5 border transition-shadow text-[#ffd900]
+            className="bg-teal-600 w-60 justify-center flex font-semibold p-2 rounded-md mt-5 transition-shadow text-[#ffd900]
         cursor-pointer duration-500 hover:shadow-[0px_6px_20px_-1px_#ffd900] capitalize max-sm:w-44"
         >
             <div className="">
