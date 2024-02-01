@@ -1,0 +1,20 @@
+
+.animate {
+    animation: animatezoom 0.6s
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+@media not all and (min-width: 640px){
+    .frame{
+        width: 370px;
+        height: 300px;
+    }
+}

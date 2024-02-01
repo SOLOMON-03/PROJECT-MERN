@@ -28,7 +28,7 @@ function Header () {
           </li>
           <li className="hover:text-[#ffd900] cursor-pointer ">
             <NavLink
-              to="/place/new"
+              to="/places/new"
               className={({ isActive }) =>
                 isActive ? "text-[#ffd900] font-semibold" : ""
               }
