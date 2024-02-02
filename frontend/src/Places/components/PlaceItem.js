@@ -6,14 +6,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import "./PlaceItem.css";
+import Button from "../../UIComponent/Button";
 
 const PlaceItem = (props) => {
     const [showMap, setShowMap] = useState(false);
     return (
         <div>
-            <li className={`w-[330px] bg-teal-700 text-white rounded-lg `}>
+            <li className={`w-[330px] bg-teal-800 text-white rounded-lg `}>
                 <div className="hover:shadow-[0px_6px_20px_-1px_#ffd900] ">
                     <div className="overflow-hidden rounded-t-lg">
                         <img
@@ -36,22 +36,14 @@ const PlaceItem = (props) => {
                             <p className="line-clamp-2">{props.description}</p>
                         </div>
                     </div>
-                    <div className="flex gap-2 p-3 justify-between font-semibold">
-                        <button
-                            className="p-2 rounded-lg w-24 bg-teal-600 hover:bg-teal-900 duration-500 hover:text-white "
-                            onClick={() => setShowMap(!showMap)}
-                        >
-                            <a href={props.href}>View Map</a>
-                        </button>
-                        <button className="p-2 rounded-lg w-24 bg-teal-600 hover:bg-green-800 duration-500 hover:text-white ">
-                            <Link to={`/places/${props.id}`}>Edit</Link>
-                        </button>
-                        <button className="p-2 rounded-lg w-24 bg-teal-600 hover:bg-red-800 duration-500 hover:text-white ">
-                            Delete
-                        </button>
+                    <div className="flex justify-between items-center text-sm p-2">
+                        <Button inverse onClick={() => setShowMap(!showMap)}>View Map</Button>
+                        <Button to={`/places/${props.id}`}>Edit</Button>
+                        <Button danger>Delete</Button>
                     </div>
                 </div>
             </li>
+            
             {showMap && (
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <div

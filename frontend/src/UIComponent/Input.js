@@ -1,53 +1,54 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from "react";
 
-import { validate } from '../Utils/Validators';
+import { validate } from "../Utils/Validators";
+import "./Input.css";
 
 const inputReducer = (state, action) => {
     switch (action.type) {
-        case 'CHANGE':
+        case "CHANGE":
             return {
                 ...state,
                 value: action.val,
-                isValid: validate(action.val, action.validators)
+                isValid: validate(action.val, action.validators),
             };
-        case 'TOUCH': {
+        case "TOUCH": {
             return {
                 ...state,
-                isTouched: true
-            }
+                isTouched: true,
+            };
         }
         default:
             return state;
     }
 };
 
-const Input = props => {
+const Input = (props) => {
     const [inputState, dispatch] = useReducer(inputReducer, {
-        value: '',
+        value: "",
         isTouched: false,
-        isValid: false
+        isValid: false,
     });
-    const {id, onInput} = props;
-    const {value, isValid} = inputState;
-    useEffect(()=>{
-        onInput(id, value, isValid)
+    const { id, onInput } = props;
+    const { value, isValid } = inputState;
+    useEffect(() => {
+        onInput(id, value, isValid);
     }, [id, value, isValid, onInput]);
-    const changeHandler = event => {
+    const changeHandler = (event) => {
         dispatch({
-            type: 'CHANGE',
+            type: "CHANGE",
             val: event.target.value,
-            validators: props.validators
+            validators: props.validators,
         });
     };
 
     const touchHandler = () => {
         dispatch({
-            type: 'TOUCH'
+            type: "TOUCH",
         });
     };
 
     const element =
-        props.element === 'input' ? (
+        props.element === "input" ? (
             <input
                 id={props.id}
                 type={props.type}
@@ -55,7 +56,6 @@ const Input = props => {
                 onChange={changeHandler}
                 onBlur={touchHandler}
                 value={inputState.value}
-                className={`outline-none p-2 rounded-md mb-3 ${!inputState.isValid ? "outline outline-red-500" : ""}`}
             />
         ) : (
             <textarea
@@ -64,17 +64,17 @@ const Input = props => {
                 onChange={changeHandler}
                 onBlur={touchHandler}
                 value={inputState.value}
-                className={`outline-none p-2 rounded-md ${!inputState.isValid ? "outline outline-red-500" : ""}`}
             />
         );
 
     return (
         <div
-        className={`flex flex-col gap-3 ${!inputState.isValid ? "text-red-500" : "" }`}
+            className={`form-control ${!inputState.isValid && inputState.isTouched && "form-control--invalid"
+                }`}
         >
-            <label htmlFor={props.id}  className={`text-lg font-semibold text-[#ffd900] ${!inputState.isValid ? "text-red-500" : ""}`}>{props.label}</label>
+            <label htmlFor={props.id}>{props.label}</label>
             {element}
-            {!inputState.isValid && inputState.isTouched && <p className='-mt-5'>{props.errorText}</p>}
+            {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
         </div>
     );
 };
